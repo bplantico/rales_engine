@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
 
-  #relationships
+  # relationships
   has_many :invoices
 
 end
