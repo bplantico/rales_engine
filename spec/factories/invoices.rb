@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :invoice do
-    status { "MyText" }
+    
+    customer
+    merchant
+
+    status { "Shipped" }
   end
 end
