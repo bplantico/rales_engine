@@ -1,8 +1,11 @@
 class InvoiceItem < ApplicationRecord
 
   # relationships
+  
   belongs_to :invoice
   belongs_to :item
+
+  # class methods
 
   def self.revenue_on_given_date(date)
     InvoiceItem.joins(invoice: :transactions)
