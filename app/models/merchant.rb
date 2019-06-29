@@ -47,4 +47,14 @@ class Merchant < ApplicationRecord
     .order('num_transacts DESC')
     .limit(1).take
   end
+
+  def merchant_revenue
+    # require "pry"; binding.pry
+    Merchant.joins(invoices: [:invoice_items, :transactions])
+    .select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    .where('transactions.result = ? AND merchants.id = ?', 'success', id)
+    .group('merchants.id')
+    .take
+  end
+
 end

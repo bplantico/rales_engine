@@ -8,6 +8,8 @@ Rails.application.routes.draw do
         get '/most_revenue', to: 'most_revenue#index'
         get '/revenue',      to: 'revenue#index'
         get '/:id/favorite_customer', to: 'favorite_customer#show'
+        get '/:id/revenue', to: 'merchant_revenue#show'
+        get '/:id/customers_with_pending_invoices', to: 'customers_with_pending_invoices#show'
       end
 
       resources :merchants, only: [:show, :index] do
@@ -15,7 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-
 end
 
-   # api_v1_merchants GET  /api/v1/merchants/:id/favorite_customer(.:format)  api/v1/merchants/favorite_customer#show
+  # /api/v1/merchants/#{merchant_id_one}/revenue"

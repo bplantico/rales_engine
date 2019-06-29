@@ -3,7 +3,7 @@
 class Api::V1::Merchants::RevenueController < ApplicationController
 
   def index
-    render json: RevenueSerializer.new(InvoiceItem.revenue_on_given_date(revenue_params[:date]))
+    render json: TotalRevenueSerializer.new(InvoiceItem.revenue_on_given_date(revenue_params[:date]))
   end
 
   private

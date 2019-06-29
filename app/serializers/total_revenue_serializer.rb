@@ -1,4 +1,6 @@
-class RevenueSerializer
+# app/serializers/total_revenue_serializer.rb
+
+class TotalRevenueSerializer
   include FastJsonapi::ObjectSerializer
 
   attribute :total_revenue do |object|

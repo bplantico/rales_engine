@@ -1,3 +1,5 @@
+# app/serializers/customer_serializer.rb
+
 class CustomerSerializer
   include FastJsonapi::ObjectSerializer
 
