@@ -36,4 +36,15 @@ class Merchant < ApplicationRecord
         .group('merchants.id').order('total_items DESC')
     end
   end
+
+  # instance methods
+
+  def favorite_customer
+    Customer.joins(invoices: [:merchant, :transactions])
+    .where('transactions.result = ? AND merchants.id = ?', 'success', self.id)
+    .select('customers.*, COUNT(transactions.id) AS num_transacts')
+    .group('customers.id')
+    .order('num_transacts DESC')
+    .limit(1).take
+  end
 end
