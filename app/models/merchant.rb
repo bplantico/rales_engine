@@ -48,13 +48,21 @@ class Merchant < ApplicationRecord
     .limit(1).take
   end
 
-  def merchant_revenue
-    # require "pry"; binding.pry
-    Merchant.joins(invoices: [:invoice_items, :transactions])
-    .select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
-    .where('transactions.result = ? AND merchants.id = ?', 'success', id)
-    .group('merchants.id')
-    .take
+  def merchant_revenue(date = {})
+    if date == nil
+      Merchant.joins(invoices: [:invoice_items, :transactions])
+      .select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+      .where('transactions.result = ? AND merchants.id = ?', 'success', id)
+      .group('merchants.id')
+      .take
+    else
+
+      Merchant.joins(invoices: [:invoice_items, :transactions])
+      .select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+      .where('transactions.result = ? AND merchants.id = ? AND CAST(invoices.created_at AS varchar(10)) LIKE ?', 'success', id, date + '%')
+      .group('merchants.id')
+      .take
+    end
   end
 
 end

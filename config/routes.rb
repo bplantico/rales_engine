@@ -19,4 +19,4 @@ Rails.application.routes.draw do
 
 end
 
-  # /api/v1/merchants/#{merchant_id_one}/revenue"
+# /api/v1/merchants/:id/revenue?date=#{date_one}"
