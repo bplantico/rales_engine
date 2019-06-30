@@ -40,6 +40,7 @@ class Merchant < ApplicationRecord
   # instance methods
 
   def favorite_customer
+    require "pry"; binding.pry
     Customer.joins(invoices: [:merchant, :transactions])
     .where('transactions.result = ? AND merchants.id = ?', 'success', self.id)
     .select('customers.*, COUNT(transactions.id) AS num_transacts')
@@ -66,7 +67,7 @@ class Merchant < ApplicationRecord
   end
 
   def pending_customers
-    Customer.find_by_sql(["SELECT customers.* FROM invoices LEFT JOIN customers ON invoices.customer_id = customers.id JOIN merchants ON invoices.merchant_id = merchants.id WHERE merchants.id = #{id} AND  invoices.id NOT IN (SELECT transactions.invoice_id FROM transactions WHERE transactions.result = 'success')", 'customers.id'])
+    Customer.find_by_sql(["SELECT customers.* FROM invoices LEFT JOIN customers ON invoices.customer_id = customers.id JOIN merchants ON invoices.merchant_id = merchants.id WHERE merchants.id = #{id} AND invoices.id NOT IN (SELECT transactions.invoice_id FROM transactions WHERE transactions.result = 'success')", 'customers.id'])
 
     # not working but close Customer.limit(10).joins('RIGHT JOIN invoices ON customers.id = invoices.customer_id JOIN merchants ON invoices.merchant_id = merchants.id LEFT JOIN transactions ON invoices.id = transactions.invoice_id').where.not('transactions.invoice_id IN ?', Transaction.select('invoice_id').where('result = ?', 'success'))
     # Transaction.joins(invoice: [:customer, :merchant]).select('customers.*').where.not(invoice_id: Transaction.select('invoice_id').where('result = ?', 'success')).where('merchants.id = ?', '17').select('customers.*').group('customers.id')
