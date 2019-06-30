@@ -4,6 +4,23 @@ class Item < ApplicationRecord
   belongs_to :merchant
   has_many :invoice_items
 
+  #class methods
+
+  def self.most_items(quantity)
+    if quantity.to_i >= 1
+      joins(:invoice_items)
+      .select('items.*, COUNT(invoice_items.id) AS instances')
+      .group('items.id')
+      .order('instances DESC')
+      .limit(quantity)
+    else
+      joins(:invoice_items)
+      .select('items.*, COUNT(invoice_items.id) AS instances')
+      .group('items.id')
+      .order('instances DESC')
+    end
+  end
+
   # instance methods
 
   def best_day

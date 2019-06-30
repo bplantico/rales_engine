@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
       namespace :items do
         get '/:id/best_day', to: 'best_day#show'
+        get 'most_items', to: 'most_items#index'
       end
 
     end
@@ -26,4 +27,4 @@ Rails.application.routes.draw do
 
 end
 
-# "/api/v1/items/#{item_id_one}/best_day"
+# /api/v1/items/most_items?quantity=#{group_size_one}"
