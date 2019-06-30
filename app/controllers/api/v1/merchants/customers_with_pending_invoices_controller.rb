@@ -3,7 +3,14 @@
 class Api::V1::Merchants::CustomersWithPendingInvoicesController < ApplicationController
 
   def show
-    # require "pry"; binding.pry
+    @merchant = Merchant.find(merchant_params[:id])
+    render json: CustomerSerializer.new(@merchant.pending_customers)
+  end
+
+  private
+
+  def merchant_params
+    params.permit(:id)
   end
 
 end
