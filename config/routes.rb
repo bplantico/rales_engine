@@ -11,12 +11,15 @@ Rails.application.routes.draw do
         get '/:id/revenue', to: 'merchant_revenue#show'
         get '/:id/customers_with_pending_invoices', to: 'customers_with_pending_invoices#show'
       end
+      resources :merchants, only: [:show, :index]
 
-      resources :merchants, only: [:show, :index] do
+      namespace :customers do
+        get '/:id/favorite_merchant', to: 'favorite_merchant#show'
       end
+
     end
   end
 
 end
 
-# /api/v1/merchants/:id/revenue?date=#{date_one}"
+# /api/v1/customers/#{customer_id_one}/favorite_merchant"
