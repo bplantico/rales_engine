@@ -21,6 +21,15 @@ describe "Merchants API" do
     expect(response).to be_successful
     expect(merchant["data"]["attributes"]["id"]).to eq(id)
     # circle back. If <["attributes"]> is removed, the return is a string which fails the test
-    
+  end
+
+  it "can get a merchant's favorite customer" do
+    id = create(:merchant).id
+    get "/api/v1/merchants/#{id}/favorite_customer"
+
+    merchant = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(merchant["data"]["attributes"]["id"]).to eq(id)
   end
 end

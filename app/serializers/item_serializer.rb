@@ -1,6 +1,6 @@
-# app/serializers/merchant_serializer.rb
+# app/serializers/item_serializer.rb
 
-class MerchantSerializer
+class ItemSerializer
   include FastJsonapi::ObjectSerializer
   attributes :id, :name
 end
