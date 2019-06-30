@@ -17,9 +17,13 @@ Rails.application.routes.draw do
         get '/:id/favorite_merchant', to: 'favorite_merchant#show'
       end
 
+      namespace :items do
+        get '/:id/best_day', to: 'best_day#show'
+      end
+
     end
   end
 
 end
 
-# /api/v1/customers/#{customer_id_one}/favorite_merchant"
+# "/api/v1/items/#{item_id_one}/best_day"
