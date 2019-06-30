@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+
       namespace :merchants do
         get '/most_items',   to: 'most_items#index'
         get '/most_revenue', to: 'most_revenue#index'
@@ -19,12 +20,11 @@ Rails.application.routes.draw do
 
       namespace :items do
         get '/:id/best_day', to: 'best_day#show'
-        get 'most_items', to: 'most_items#index'
+        get 'most_items',    to: 'most_items#index'
+        get 'most_revenue',  to: 'most_revenue#index'
       end
 
     end
   end
 
 end
-
-# /api/v1/items/most_items?quantity=#{group_size_one}"
