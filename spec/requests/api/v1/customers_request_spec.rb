@@ -22,13 +22,4 @@ describe "Customers API" do
     expect(customer["data"]["attributes"]["id"]).to eq(id)
   end
 
-  it "can get a merchant's favorite customer" do
-    id = create(:merchant).id
-    get "/api/v1/merchants/#{id}/favorite_customer"
-
-    merchant = JSON.parse(response.body)
-
-    expect(response).to be_successful
-    expect(merchant["data"]["attributes"]["id"]).to eq(id)
-  end
 end
