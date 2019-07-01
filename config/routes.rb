@@ -35,10 +35,11 @@ Rails.application.routes.draw do
 
       namespace :invoices do
         get '/find', to: 'find#show'
+        get '/find_all', to: 'find#index'
       end
       resources :invoices, only: [:index, :show]
 
-      # /api/v1/invoices/find?id=#{invoice_find['id']}
+      # "/api/v1/invoices/find_all?id=#{invoice_find_all['id']}"
 
     end
   end

@@ -2,6 +2,10 @@
 
 class Api::V1::Invoices::FindController < ApplicationController
 
+  def index
+    render json: InvoiceSerializer.new(Invoice.find_all(invoice_params))
+  end
+
   def show
     render json: InvoiceSerializer.new(Invoice.find_by(invoice_params))
   end
