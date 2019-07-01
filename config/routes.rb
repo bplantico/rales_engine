@@ -27,7 +27,8 @@ Rails.application.routes.draw do
         get '/most_revenue',  to: 'most_revenue#index'
       end
 
-# /api/v1/customers/find?id=#{customer_germaine['id']}
+      resources :invoice_items, only: [:index, :show]
+
     end
   end
 
