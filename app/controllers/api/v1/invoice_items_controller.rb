@@ -7,7 +7,13 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def show
-    render json: InvoiceItemSerializer.new(InvoiceItem.find_by(invoice_item_params))
+    if invoice_item_params[:unit_price].nil?
+      render json: InvoiceItemSerializer.new(InvoiceItem.find_by(invoice_item_params))
+    else
+      unformatted_price = invoice_item_params[:unit_price]
+      db_formatted_price = ((unformatted_price.to_f*100).round(0))
+      render json: InvoiceItemSerializer.new(InvoiceItem.find_by(unit_price: db_formatted_price))
+    end
   end
 
   private
