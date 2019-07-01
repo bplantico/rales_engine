@@ -25,7 +25,10 @@ Rails.application.routes.draw do
         get '/:id/best_day', to: 'best_day#show'
         get '/most_items',    to: 'most_items#index'
         get '/most_revenue',  to: 'most_revenue#index'
+        get '/find', to: 'find#show'
+        get '/find_all', to: 'find#index'
       end
+      resources :items, only: [:index, :show]
 
       namespace :invoice_items do
         get '/find', to: 'find#show'
@@ -39,7 +42,8 @@ Rails.application.routes.draw do
       end
       resources :invoices, only: [:index, :show]
 
-      # "/api/v1/invoices/find_all?id=#{invoice_find_all['id']}"
+      # "/api/v1/items/find?id=#{item_find['id']}"
+      # "/api/v1/items/find_all?id=#{item_find_all['id']}"
 
     end
   end
