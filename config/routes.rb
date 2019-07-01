@@ -15,7 +15,6 @@ Rails.application.routes.draw do
         get '/find_all', to: 'find#index'
       end
       resources :merchants, only: [:show, :index]
-      # "/api/v1/merchants/find?id=#{merchant_find['id']}"
 
       namespace :customers do
         get '/:id/favorite_merchant', to: 'favorite_merchant#show'
@@ -45,7 +44,12 @@ Rails.application.routes.draw do
       end
       resources :invoices, only: [:index, :show]
 
-
+      namespace :transactions do
+        get '/find', to: 'find#show'
+        get '/find_all', to: 'find#index'
+      end
+      resources :transactions, only: [:index, :show]
+      # "/api/v1/transactions/find?id=#{transaction_find['id']}"
     end
   end
 
