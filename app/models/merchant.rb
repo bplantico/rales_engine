@@ -40,7 +40,6 @@ class Merchant < ApplicationRecord
   # instance methods
 
   def favorite_customer
-    require "pry"; binding.pry
     Customer.joins(invoices: [:merchant, :transactions])
     .where('transactions.result = ? AND merchants.id = ?', 'success', self.id)
     .select('customers.*, COUNT(transactions.id) AS num_transacts')
