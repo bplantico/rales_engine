@@ -11,8 +11,11 @@ Rails.application.routes.draw do
         get '/:id/favorite_customer', to: 'favorite_customer#show'
         get '/:id/revenue', to: 'merchant_revenue#show'
         get '/:id/customers_with_pending_invoices', to: 'customers_with_pending_invoices#show'
+        get '/find', to: 'find#show'
+        get '/find_all', to: 'find#index'
       end
       resources :merchants, only: [:show, :index]
+      # "/api/v1/merchants/find?id=#{merchant_find['id']}"
 
       namespace :customers do
         get '/:id/favorite_merchant', to: 'favorite_merchant#show'
@@ -42,8 +45,6 @@ Rails.application.routes.draw do
       end
       resources :invoices, only: [:index, :show]
 
-      # "/api/v1/items/find?id=#{item_find['id']}"
-      # "/api/v1/items/find_all?id=#{item_find_all['id']}"
 
     end
   end
